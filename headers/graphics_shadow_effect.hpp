@@ -55,6 +55,24 @@ private:
 	Thickness m_thickness;
 
 	N_TypesAliases::T_BlurRadius m_blur_radius;
+private:
+	[[nodiscard]] inline QRectF GetAdjustedGeometry(const QRectF &) const;
+
+	[[nodiscard]] Thickness GetDistance() const noexcept;
+
+	QPixmap GetPixelMapOfSource(QPoint &);
+
+	QImage GetImageWithSetThickness(const QPixmap &);
+	[[nodiscard]] QSizeF GetAdjustedSize(const QPixmap &) const noexcept;
+	void DrawOnImageWithSetThickness(QImage &, const QPixmap &) const;
+
+	void SetBlurRadiusOnImage(QImage &) const;
+	void DrawOnImageWithSetBlurRadius(QImage &, QImage &) const;
+
+	void SetColorOnImage(QImage &) const;
+
+	inline static void DrawCurrentEffect(QPainter *painter, const QPoint &, const QImage  &);
+	inline static void DrawCurrentSource(QPainter *painter, const QPoint &, const QPixmap &);
 };
 
 [[maybe_unused]] inline GraphicsShadowEffect::GraphicsShadowEffect
