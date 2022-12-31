@@ -48,4 +48,13 @@ inline void GraphicsShadowEffect::DrawCurrentSource(QPainter *painter,
 {
 	painter->drawPixmap(offset_of_pixel_map_of_source, pixel_map_of_source);
 }
+
+QRectF GraphicsShadowEffect::boundingRectFor(const QRectF &geometry_of_widget) const
+{
+	const QRectF adjusted_geometry{this->GetAdjustedGeometry(geometry_of_widget)};
+
+	QRectF bounding_rectangle{geometry_of_widget.united(adjusted_geometry)};
+
+	return bounding_rectangle;
+}
 }  // namespace N_GraphicsShadowEffect
