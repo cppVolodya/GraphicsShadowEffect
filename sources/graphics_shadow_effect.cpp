@@ -57,4 +57,14 @@ QRectF GraphicsShadowEffect::boundingRectFor(const QRectF &geometry_of_widget) c
 
 	return bounding_rectangle;
 }
+
+[[nodiscard]] inline QRectF GraphicsShadowEffect::GetAdjustedGeometry(const QRectF &geometry_of_widget) const
+{
+	const Thickness distance{this->GetDistance()};
+
+	QRectF adjusted_geometry{geometry_of_widget.adjusted(-distance.GetTop   (), -distance.GetLeft (),
+														  distance.GetBottom(),  distance.GetRight())};
+
+	return adjusted_geometry;
+}
 }  // namespace N_GraphicsShadowEffect
