@@ -67,4 +67,16 @@ QRectF GraphicsShadowEffect::boundingRectFor(const QRectF &geometry_of_widget) c
 
 	return adjusted_geometry;
 }
+
+[[nodiscard]] Thickness GraphicsShadowEffect::GetDistance() const noexcept
+{
+	Thickness distance;
+
+	distance.SetTop	  (this->GetThickness().GetTop   () + this->GetBlurRadius());
+	distance.SetBottom(this->GetThickness().GetBottom() + this->GetBlurRadius());
+	distance.SetLeft  (this->GetThickness().GetLeft  () + this->GetBlurRadius());
+	distance.SetRight( this->GetThickness().GetRight () + this->GetBlurRadius());
+
+	return distance;
+}
 }  // namespace N_GraphicsShadowEffect
