@@ -35,6 +35,19 @@ void GraphicsShadowEffect::draw(QPainter *painter)
 	}
 }
 
+QPixmap GraphicsShadowEffect::GetPixelMapOfSource(QPoint &offset_of_pixel_map)
+{
+	constexpr Qt::CoordinateSystem coordinate_system{ Qt::DeviceCoordinates };
+
+	constexpr QGraphicsEffect::PixmapPadMode padded_mode{ QGraphicsEffect::PadToEffectiveBoundingRect };
+
+	QPixmap pixel_map{ this->sourcePixmap(coordinate_system,
+										  &offset_of_pixel_map,
+										  padded_mode) };
+
+	return pixel_map;
+}
+
 inline void GraphicsShadowEffect::DrawCurrentEffect(QPainter *painter,
 													const QPoint &offset_of_pixel_map_of_source,
 													const QImage &image)
