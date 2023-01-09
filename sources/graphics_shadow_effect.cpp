@@ -48,6 +48,60 @@ QPixmap GraphicsShadowEffect::GetPixelMapOfSource(QPoint &offset_of_pixel_map)
 	return pixel_map;
 }
 
+QImage GraphicsShadowEffect::GetImageWithSetThickness(const QPixmap &pixel_map_of_source)
+{
+	QSizeF adjusted_size{ this->GetAdjustedSize(pixel_map_of_source) };
+
+	QImage image(adjusted_size.toSize(), QImage::Format_ARGB32_Premultiplied);
+	image.fill(0U);
+
+	QPixmap adjusted_scale{ pixel_map_of_source.scaled(adjusted_size.toSize()) };
+	this->DrawOnImageWithSetThickness(image, adjusted_scale);
+
+	return image;
+}
+
+[[nodiscard]] QSizeF GraphicsShadowEffect::GetAdjustedSize(const QPixmap &pixel_map_of_source) const noexcept
+{
+	QSizeF adjusted_size;
+
+	adjusted_size.setWidth(static_cast<qreal>(pixel_map_of_source.size().width()) +
+		this->GetThickness().GetRight() + this->GetThickness().GetLeft());
+
+	adjusted_size.setHeight(static_cast<qreal>(pixel_map_of_source.size().height()) +
+		this->GetThickness().GetBottom() + this->GetThickness().GetTop());
+
+	return adjusted_size;
+}
+
+void GraphicsShadowEffect::DrawOnImageWithSetThickness(QImage		 &image_with_set_thickness,
+													   const QPixmap &adjusted_scale) const
+{
+	QPainter painter(&image_with_set_thickness);
+	painter.setCompositionMode(QPainter::CompositionMode_Source);
+
+	painter.drawPixmap(QPointF(-this->GetThickness().GetLeft(),
+							   -this->GetThickness().GetTop ()), adjusted_scale);
+
+	QMessageBox::StandardButton button_pressed{ QMessageBox::NoButton };
+	QWidget temporary;
+
+	if(!painter.end())
+	{
+		qDebug() << "Error completing drawing graphics shadow effect - DrawOnImageWithSetThickness()!";
+		button_pressed = QMessageBox::critical(&temporary, "Rss Feed Reader",
+											   "Error completing drawing graphics shadow effect -"
+											   "DrawOnImageWithSetThickness()!",
+											   QMessageBox::Ok);
+	}
+
+	if(button_pressed == QMessageBox::Ok)
+	{
+		throw std::runtime_error("Error completing drawing graphics shadow effect - "
+								 "DrawOnImageWithSetThickness()!");
+	}
+}
+
 inline void GraphicsShadowEffect::DrawCurrentEffect(QPainter *painter,
 													const QPoint &offset_of_pixel_map_of_source,
 													const QImage &image)
