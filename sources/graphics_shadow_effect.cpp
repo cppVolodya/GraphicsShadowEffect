@@ -102,6 +102,43 @@ void GraphicsShadowEffect::DrawOnImageWithSetThickness(QImage		 &image_with_set_
 	}
 }
 
+void GraphicsShadowEffect::SetBlurRadiusOnImage(QImage &old_image) const
+{
+	QImage new_image{old_image.size(), QImage::Format_ARGB32_Premultiplied};
+	new_image.fill(0U);
+
+	this->DrawOnImageWithSetBlurRadius(new_image, old_image);
+
+	old_image = new_image;
+}
+
+void GraphicsShadowEffect::DrawOnImageWithSetBlurRadius(QImage &new_image, QImage &old_image) const
+{
+	constexpr bool quality   {true};
+	constexpr bool alpha_only{true};
+
+	QPainter painter{&new_image};
+	qt_blurImage(&painter, old_image, this->GetBlurRadius(), quality, alpha_only);
+
+	QMessageBox::StandardButton button_pressed{ QMessageBox::NoButton };
+	QWidget temporary;
+
+	if(!painter.end())
+	{
+		qDebug() << "Error completing drawing graphics shadow effect - DrawOnImageWithSetBlurRadius()!";
+		button_pressed = QMessageBox::critical(&temporary, "Rss Feed Reader",
+											   "Error completing drawing graphics shadow effect - "
+											   "DrawOnImageWithSetBlurRadius()!",
+											   QMessageBox::Ok);
+	}
+
+	if(button_pressed == QMessageBox::Ok)
+	{
+		throw std::runtime_error("Error completing drawing graphics shadow effect - "
+								 "DrawOnImageWithSetBlurRadius()!");
+	}
+}
+
 inline void GraphicsShadowEffect::DrawCurrentEffect(QPainter *painter,
 													const QPoint &offset_of_pixel_map_of_source,
 													const QImage &image)
