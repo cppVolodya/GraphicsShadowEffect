@@ -139,6 +139,31 @@ void GraphicsShadowEffect::DrawOnImageWithSetBlurRadius(QImage &new_image, QImag
 	}
 }
 
+void GraphicsShadowEffect::SetColorOnImage(QImage &image) const
+{
+	QPainter painter{&image};
+	painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+	painter.fillRect(image.rect(), this->GetColor());
+
+	QMessageBox::StandardButton button_pressed{ QMessageBox::NoButton };
+	QWidget temporary;
+
+	if(!painter.end())
+	{
+		qDebug() << "Error completing drawing graphics shadow effect - SetColorOnImage()!";
+		button_pressed = QMessageBox::critical(&temporary, "Rss Feed Reader",
+											   "Error completing drawing graphics shadow effect -"
+											   "SetColorOnImage()!",
+											   QMessageBox::Ok);
+	}
+
+	if(button_pressed == QMessageBox::Ok)
+	{
+		throw std::runtime_error("Error completing drawing graphics shadow effect - "
+								 "SetColorOnImage()!");
+	}
+}
+
 inline void GraphicsShadowEffect::DrawCurrentEffect(QPainter *painter,
 													const QPoint &offset_of_pixel_map_of_source,
 													const QImage &image)
