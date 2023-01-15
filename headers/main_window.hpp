@@ -29,6 +29,15 @@ protected:
 	void mousePressEvent  (QMouseEvent *event) override;
 	void mouseReleaseEvent(QMouseEvent *event) override;
 	void mouseMoveEvent   (QMouseEvent *event) override;
+private slots:
+	void SlotOpenColorDialog();
+
+	void SlotSetBlurRadiusForGraphicsShadowEffect		(qreal value);
+	void SlotSetThicknessForGraphicsShadowEffect	    (qreal value);
+	void SlotSetAlphaColorChannelForGraphicsShadowEffect(int value);
+
+	void SlotSetStateForCheckBoxOfWindow(int state);
+	void SlotSetStateForCheckBoxOfWidget(int state);
 };
 }  // namespace N_GraphicsShadowEffect
 
