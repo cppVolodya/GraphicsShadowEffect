@@ -38,6 +38,34 @@ private slots:
 
 	void SlotSetStateForCheckBoxOfWindow(int state);
 	void SlotSetStateForCheckBoxOfWidget(int state);
+private:
+	GraphicsShadowEffect *m_graphics_shadow_effect_for_window;
+	GraphicsShadowEffect *m_graphics_shadow_effect_for_widget;
+
+	QPainterPath m_window_shape;
+
+	QPushButton *m_button_widget;
+	QPushButton *m_exit_button;
+
+	QSlider *m_slider_of_blur_radius;
+	QSlider *m_slider_of_thickness;
+	QSlider *m_slider_of_alpha_color_channel;
+
+	QLabel *m_label_of_blur_radius;
+	QLabel *m_label_of_thickness;
+	QLabel *m_label_of_alpha_color_channel;
+
+	QCheckBox *m_check_box_of_window;
+	QCheckBox *m_check_box_of_widget;
+
+	QColor m_chosen_color;
+
+	QPointF m_last_drag_position;
+
+	int m_state_of_check_box_of_window;
+	int m_state_of_check_box_of_widget;
+
+	bool m_mouse_is_pressed;
 };
 }  // namespace N_GraphicsShadowEffect
 
