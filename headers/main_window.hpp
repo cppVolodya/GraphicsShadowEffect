@@ -66,6 +66,20 @@ private:
 	int m_state_of_check_box_of_widget;
 
 	bool m_mouse_is_pressed;
+private:
+	void SetDefaultSettings();
+
+	inline void CustomizeGraphicsShadowEffects();
+	inline static void CustomizeGraphicsShadowEffects(GraphicsShadowEffect *graphics_shadow_effect);
+
+	inline void CustomizeWidgets					     ();
+	void CustomizeButtonWidgets							 ();
+	inline void CustomizeCheckBoxWidgets				 ();
+	inline void CustomizeSliderWidgets					 ();
+	inline void CustomizeSliderWidgetsOfBlurRadius		 ();
+	inline void CustomizeSliderWidgetsOfThickness 		 ();
+	inline void CustomizeSliderWidgetsOfAlphaColorChannel();
+	inline void CustomizeLabelWidgets					 ();
 };
 }  // namespace N_GraphicsShadowEffect
 
