@@ -80,6 +80,26 @@ private:
 	inline void CustomizeSliderWidgetsOfThickness 		 ();
 	inline void CustomizeSliderWidgetsOfAlphaColorChannel();
 	inline void CustomizeLabelWidgets					 ();
+
+	void ConfigureBoxLayout();
+	inline void ConfigureBoxLayoutForBlurRadius(QHBoxLayout *box_layout);
+	inline void ConfigureBoxLayoutForThickness(QHBoxLayout *box_layout);
+	inline void ConfigureBoxLayoutForAlphaColorChannel(QHBoxLayout *box_layout);
+	static inline void ConfigureBoxLayoutForSliders(QVBoxLayout *box_layout,
+													QHBoxLayout *layout_of_blur_radius,
+													QHBoxLayout *layout_of_thickness,
+													QHBoxLayout *layout_of_alpha_color_channel);
+	inline void ConfigureBoxLayoutForCheck_boxes(QVBoxLayout *box_layout);
+	void ConfigureMainBoxLayout(QVBoxLayout *box_layout,
+								QVBoxLayout *layout_of_sliders,
+								QVBoxLayout *layout_of_check_boxes);
+
+	inline void SetGraphicsShadowEffects();
+
+	void        ConnectSignalsToSlots			  ();
+	inline void ConnectSignalsToSlotsForButtons	  ();
+	inline void ConnectSignalsToSlotsForCheckBoxes();
+	inline void ConnectSignalsToSlotsForSliders   ();
 };
 }  // namespace N_GraphicsShadowEffect
 
