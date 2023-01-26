@@ -40,4 +40,19 @@ MainWindow::MainWindow(QWidget *parent)
 	this->SetGraphicsShadowEffects  	();
 	this->ConnectSignalsToSlots			();
 }
+
+void MainWindow::SetDefaultSettings()
+{
+	this->setAttribute(Qt::WA_TranslucentBackground);
+	this->setWindowFlag(Qt::FramelessWindowHint);
+
+	this->setWindowIcon(QIcon(N_DefaultValues::S_PATH_TO_ICON_OF_WINDOW.data()));
+
+	this->resize(N_DefaultValues::S_WIDTH_OF_WINDOW,
+				 N_DefaultValues::S_HEIGHT_OF_WINDOW);
+
+	this->m_window_shape.addRoundedRect(N_DefaultValues::S_WINDOW_RECT,
+										N_DefaultValues::S_ROUNDNESS_OF_WINDOW_SHAPE,
+										N_DefaultValues::S_ROUNDNESS_OF_WINDOW_SHAPE);
+}
 }  // namespace N_GraphicsShadowEffect
