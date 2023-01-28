@@ -55,4 +55,17 @@ void MainWindow::SetDefaultSettings()
 										N_DefaultValues::S_ROUNDNESS_OF_WINDOW_SHAPE,
 										N_DefaultValues::S_ROUNDNESS_OF_WINDOW_SHAPE);
 }
+
+inline void MainWindow::CustomizeGraphicsShadowEffects()
+{
+	MainWindow::CustomizeGraphicsShadowEffects(this->m_graphics_shadow_effect_for_window);
+	MainWindow::CustomizeGraphicsShadowEffects(this->m_graphics_shadow_effect_for_widget);
+}
+
+void MainWindow::CustomizeGraphicsShadowEffects(GraphicsShadowEffect *graphics_shadow_effect)
+{
+	graphics_shadow_effect->SetBlurRadius(N_DefaultValues::S_BLUR_RADIUS);
+	graphics_shadow_effect->SetThickness (N_DefaultValues::S_THICKNESS  );
+	graphics_shadow_effect->SetColor	  (N_DefaultValues::S_COLOR		 );
+}
 }  // namespace N_GraphicsShadowEffect
