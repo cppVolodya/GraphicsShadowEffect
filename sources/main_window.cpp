@@ -124,4 +124,81 @@ inline void MainWindow::CustomizeLabelWidgets()
 	this->m_label_of_thickness = std::make_unique<QLabel>  		   ("Thickness          ", this).release();
 	this->m_label_of_alpha_color_channel = std::make_unique<QLabel>("Alpha Color Channel", this).release();
 }
+
+void MainWindow::ConfigureBoxLayout()
+{
+	QHBoxLayout *layout_of_blur_radius = std::make_unique<QHBoxLayout>().release();
+    this->ConfigureBoxLayoutForBlurRadius(layout_of_blur_radius);
+
+	QHBoxLayout *layout_of_thickness = std::make_unique<QHBoxLayout>().release();
+    this->ConfigureBoxLayoutForThickness(layout_of_thickness);
+
+	QHBoxLayout *layout_of_alpha_color_channel = std::make_unique<QHBoxLayout>().release();
+    this->ConfigureBoxLayoutForAlphaColorChannel(layout_of_alpha_color_channel);
+
+	QVBoxLayout *layout_of_sliders = std::make_unique<QVBoxLayout>().release();
+	MainWindow::ConfigureBoxLayoutForSliders(layout_of_sliders,
+											 layout_of_blur_radius,
+											 layout_of_thickness,
+											 layout_of_alpha_color_channel);
+
+	QVBoxLayout *layout_of_check_boxes = std::make_unique<QVBoxLayout>().release();
+    this->ConfigureBoxLayoutForCheck_boxes(layout_of_check_boxes);
+
+	QVBoxLayout *layout_of_main = std::make_unique<QVBoxLayout>(this).release();
+    this->ConfigureMainBoxLayout(layout_of_main,
+								 layout_of_sliders,
+								 layout_of_check_boxes);
+
+	this->setLayout(layout_of_main);
+}
+
+inline void MainWindow::ConfigureBoxLayoutForBlurRadius(QHBoxLayout *box_layout)
+{
+	box_layout->addWidget(this->m_label_of_blur_radius);
+	box_layout->addWidget(this->m_slider_of_blur_radius);
+}
+
+inline void MainWindow::ConfigureBoxLayoutForThickness(QHBoxLayout *box_layout)
+{
+	box_layout->addWidget(this->m_label_of_thickness);
+	box_layout->addWidget(this->m_slider_of_thickness);
+}
+
+inline void MainWindow::ConfigureBoxLayoutForAlphaColorChannel(QHBoxLayout *box_layout)
+{
+	box_layout->addWidget(this->m_label_of_alpha_color_channel);
+	box_layout->addWidget(this->m_slider_of_alpha_color_channel);
+}
+
+inline void MainWindow::ConfigureBoxLayoutForSliders(QVBoxLayout *box_layout,
+													 QHBoxLayout *layout_of_blur_radius,
+													 QHBoxLayout *layout_of_thickness,
+													 QHBoxLayout *layout_of_alpha_color_channel)
+{
+	box_layout->addLayout(layout_of_blur_radius);
+	box_layout->addLayout(layout_of_thickness);
+	box_layout->addLayout(layout_of_alpha_color_channel);
+}
+
+inline void MainWindow::ConfigureBoxLayoutForCheck_boxes(QVBoxLayout *box_layout)
+{
+	box_layout->addWidget(this->m_check_box_of_window);
+	box_layout->addWidget(this->m_check_box_of_widget);
+}
+
+void MainWindow::ConfigureMainBoxLayout(QVBoxLayout *box_layout,
+										QVBoxLayout *layout_of_sliders,
+										QVBoxLayout *layout_of_check_boxes)
+
+{
+	box_layout->addWidget(this->m_exit_button);
+	box_layout->addLayout(layout_of_sliders);
+	box_layout->addLayout(layout_of_check_boxes);
+	box_layout->addWidget(this->m_button_widget);
+	box_layout->setContentsMargins(N_DefaultValues::S_CONTENTS_MARGINS_OF_WINDOW,
+								   N_DefaultValues::S_CONTENTS_MARGINS_OF_WINDOW,
+								   N_DefaultValues::S_CONTENTS_MARGINS_OF_WINDOW,
+								   N_DefaultValues::S_CONTENTS_MARGINS_OF_WINDOW);
+}
 }  // namespace N_GraphicsShadowEffect
