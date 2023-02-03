@@ -208,4 +208,41 @@ inline void MainWindow::SetGraphicsShadowEffects()
 	this->setGraphicsEffect					(m_graphics_shadow_effect_for_window);
 	this->m_button_widget->setGraphicsEffect(m_graphics_shadow_effect_for_widget);
 }
+
+void MainWindow::ConnectSignalsToSlots()
+{
+	this->ConnectSignalsToSlotsForButtons	();
+	this->ConnectSignalsToSlotsForCheckBoxes();
+	this->ConnectSignalsToSlotsForSliders	();
+}
+
+inline void MainWindow::ConnectSignalsToSlotsForButtons()
+{
+	(void)QObject::connect(this->m_button_widget, &QPushButton::pressed,
+						   this, 				  &MainWindow::SlotOpenColorDialog);
+
+	(void)QObject::connect(this->m_exit_button, &QPushButton::pressed,
+						   this, 				&MainWindow::close);
+}
+
+inline void MainWindow::ConnectSignalsToSlotsForCheckBoxes()
+{
+	(void)QObject::connect(this->m_check_box_of_window, &QCheckBox::stateChanged,
+						   this, 						&MainWindow::SlotSetStateForCheckBoxOfWindow);
+
+	(void)QObject::connect(this->m_check_box_of_widget, &QCheckBox::stateChanged,
+						   this, 						&MainWindow::SlotSetStateForCheckBoxOfWidget);
+}
+
+inline void MainWindow::ConnectSignalsToSlotsForSliders()
+{
+	(void)QObject::connect(this->m_slider_of_blur_radius, &QSlider::valueChanged,
+						   this , 						  &MainWindow::SlotSetBlurRadiusForGraphicsShadowEffect);
+
+	(void)QObject::connect(this->m_slider_of_thickness, &QSlider::valueChanged,
+						   this ,						&MainWindow::SlotSetThicknessForGraphicsShadowEffect);
+
+	(void)QObject::connect(this->m_slider_of_alpha_color_channel, &QSlider::valueChanged,
+						   this , 								  &MainWindow::SlotSetAlphaColorChannelForGraphicsShadowEffect);
+}
 }  // namespace N_GraphicsShadowEffect
