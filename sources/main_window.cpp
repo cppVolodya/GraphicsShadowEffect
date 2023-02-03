@@ -201,4 +201,11 @@ void MainWindow::ConfigureMainBoxLayout(QVBoxLayout *box_layout,
 								   N_DefaultValues::S_CONTENTS_MARGINS_OF_WINDOW,
 								   N_DefaultValues::S_CONTENTS_MARGINS_OF_WINDOW);
 }
+
+
+inline void MainWindow::SetGraphicsShadowEffects()
+{
+	this->setGraphicsEffect					(m_graphics_shadow_effect_for_window);
+	this->m_button_widget->setGraphicsEffect(m_graphics_shadow_effect_for_widget);
+}
 }  // namespace N_GraphicsShadowEffect
