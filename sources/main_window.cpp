@@ -280,4 +280,75 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
 
 	QWidget::mouseMoveEvent(event);
 }
+
+void MainWindow::SlotOpenColorDialog()
+{
+	this->m_chosen_color = QColorDialog::getColor(Qt::white, this, "Select Color");
+	this->m_chosen_color.setAlpha(this->m_slider_of_alpha_color_channel->value());
+
+	if(this->m_state_of_check_box_of_window == Qt::Checked)
+	{
+		this->m_graphics_shadow_effect_for_window->SetColor(this->m_chosen_color);
+	}
+
+	if(this->m_state_of_check_box_of_widget == Qt::Checked)
+	{
+		this->m_graphics_shadow_effect_for_widget->SetColor(this->m_chosen_color);
+	}
+
+	this->update();
+}
+
+void MainWindow::SlotSetBlurRadiusForGraphicsShadowEffect(qreal value)
+{
+	if(this->m_state_of_check_box_of_window == Qt::Checked)
+	{
+		this->m_graphics_shadow_effect_for_window->SetBlurRadius(value);
+	}
+
+	if(this->m_state_of_check_box_of_widget == Qt::Checked)
+	{
+		this->m_graphics_shadow_effect_for_widget->SetBlurRadius(value);
+	}
+}
+
+void MainWindow::SlotSetThicknessForGraphicsShadowEffect(qreal value)
+{
+	if(this->m_state_of_check_box_of_window == Qt::Checked)
+	{
+		this->m_graphics_shadow_effect_for_window->SetThickness(value);
+	}
+
+	if(this->m_state_of_check_box_of_widget == Qt::Checked)
+	{
+		this->m_graphics_shadow_effect_for_widget->SetThickness(value);
+	}
+}
+
+void MainWindow::SlotSetAlphaColorChannelForGraphicsShadowEffect(int value)
+{
+	if(this->m_state_of_check_box_of_window == Qt::Checked)
+	{
+		this->m_chosen_color.setAlpha(value);
+		this->m_graphics_shadow_effect_for_window->SetColor(m_chosen_color);
+		this->update();
+	}
+
+	if(this->m_state_of_check_box_of_widget == Qt::Checked)
+	{
+		this->m_chosen_color.setAlpha(value);
+		this->m_graphics_shadow_effect_for_widget->SetColor(m_chosen_color);
+		this->update();
+	}
+}
+
+void MainWindow::SlotSetStateForCheckBoxOfWindow(int state)
+{
+	this->m_state_of_check_box_of_window = state;
+}
+
+void MainWindow::SlotSetStateForCheckBoxOfWidget(int state)
+{
+	this->m_state_of_check_box_of_widget = state;
+}
 }  // namespace N_GraphicsShadowEffect
