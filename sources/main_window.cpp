@@ -245,4 +245,39 @@ inline void MainWindow::ConnectSignalsToSlotsForSliders()
 	(void)QObject::connect(this->m_slider_of_alpha_color_channel, &QSlider::valueChanged,
 						   this , 								  &MainWindow::SlotSetAlphaColorChannelForGraphicsShadowEffect);
 }
+
+void MainWindow::paintEvent(QPaintEvent *event)
+{
+	QPainter painter(this);
+	painter.setRenderHint(QPainter::Antialiasing, true);
+	painter.fillPath(m_window_shape, Qt::white);
+
+	QWidget::paintEvent(event);
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event)
+{
+	this->m_mouse_is_pressed = true;
+	this->m_last_drag_position = event->globalPosition();
+
+	QWidget::mousePressEvent(event);
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *event)
+{
+	this->m_mouse_is_pressed = false;
+
+	QWidget::mouseReleaseEvent(event);
+}
+
+void MainWindow::mouseMoveEvent(QMouseEvent *event)
+{
+	if(this->m_mouse_is_pressed)
+	{
+		this->move((event->globalPosition() - m_last_drag_position).toPoint() + this->pos());
+		this->m_last_drag_position = event->globalPosition();
+	}
+
+	QWidget::mouseMoveEvent(event);
+}
 }  // namespace N_GraphicsShadowEffect
