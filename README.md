@@ -12,7 +12,7 @@
 
 "Graphics Shadow Effect" is a program that shows the shadow effect for widgets and windows.
 
-![ProgramIcon](https://github.com/cppVolodya/tasks/assets/103601559/314cbe0d-8912-4ddd-93f1-4277b2890719)
+![ProgramIcon](https://github.com/cppVolodya/GraphicsShadowEffect/assets/103601559/bdc8c370-62db-4df9-8684-8f6d0515f0f0)
 
 ## Tech Stack
 
@@ -29,23 +29,23 @@
 
 - Changing the blur radius parameter:
 
-https://github.com/cppVolodya/tasks/assets/103601559/fbf81980-38c0-4a2a-b207-cd7fb303e217
+https://github.com/cppVolodya/GraphicsShadowEffect/assets/103601559/241c2d90-a6e6-49cc-bc14-426241f3db32
 
 - Change the effect thickness parameter:
 
-https://github.com/cppVolodya/tasks/assets/103601559/81d41b8f-bf1c-4acf-bfc9-3deeee7430ff
+https://github.com/cppVolodya/GraphicsShadowEffect/assets/103601559/f88ff220-5c05-4054-ab15-0c2a9cdcbe1a
 
 - Changing the alpha channel parameter:
 
-https://github.com/cppVolodya/tasks/assets/103601559/37fe3ae9-3bd7-44d7-adfc-f856d5df0a85
+https://github.com/cppVolodya/GraphicsShadowEffect/assets/103601559/75c09c82-a3be-42c3-b673-c562d9f75b26
 
 - Changing the color parameter:
 
-https://github.com/cppVolodya/tasks/assets/103601559/1aae97cc-a499-4714-80ca-ba4c602b00d6
+https://github.com/cppVolodya/GraphicsShadowEffect/assets/103601559/1693c655-c331-4f2b-bee3-f7482efc31f7
 
 - Change all parameters:
 
-https://github.com/cppVolodya/tasks/assets/103601559/e4e0d28a-5317-4aa7-80e1-03a431c92fa4
+https://github.com/cppVolodya/GraphicsShadowEffect/assets/103601559/469e6555-60fc-44c0-99db-e5099a906289
 
 ## Run Locally
 
